@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Siswa SMA - Alexander Putra</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ==========================================
+         BAGIAN CSS (style.css)
+         ========================================== -->
+    <style>
+        /* === RESET & DESAIN DASAR === */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary-color: #06b6d4;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Mode variables */
+        body.dark-theme {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: var(--transition);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* === NAVBAR / NAVIGASI === */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        body.dark-theme .navbar {
+            background-color: rgba(30, 41, 59, 0.85);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Responsive Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* === CONTAINER UTAMA === */
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .page-section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === HALAMAN 1: BERANDA & BIODATA === */
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2.5rem;
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .profile-image-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .badge-status {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #10b981;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 2px solid var(--card-bg);
+        }
+
+        .profile-details {
+            flex-grow: 1;
+        }
+
+        .profile-details h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.2rem;
+            color: var(--text-main);
+        }
+
+        .profile-subtitle {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio-text {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .biodata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            background-color: rgba(79, 70, 229, 0.05);
+            padding: 1.2rem;
+            border-radius: 12px;
+        }
+
+        .biodata-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .biodata-item span.label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .biodata-item span.val {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Prestasi / Minat Cards */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+        }
+
+        .info-card li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .info-card li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+        }
+
+        /* === HALAMAN 2: JADWAL PELAJARAN === */
+        .section-header {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-main);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 650px;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .schedule-table th {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .schedule-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        body.dark-theme .schedule-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .tag-subject {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background-color: rgba(6, 182, 212, 0.15);
+            color: var(--secondary-color);
+        }
+
+        /* === HALAMAN 3: CATATAN TUGAS === */
+        .task-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .btn-add-task {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-add-task:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .task-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .task-card.completed {
+            opacity: 0.7;
+            border-left: 5px solid #10b981;
+        }
+
+        .task-card.pending {
+            border-left: 5px solid #f59e0b;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .task-subject {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .task-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.8rem;
+            margin-top: auto;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .action-btn.check:hover { color: #10b981; }
+        .action-btn.delete:hover { color: #ef4444; }
+
+        /* MODAL (POPUP FORM TUGAS) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* === RESPONSIVE DESIGN (MEDIA QUERIES) === */
+        @media (max-width: 768px) {
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .biodata-grid {
+                text-align: left;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border-color);
+                display: none;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGASI UTAMA -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>SiswaPorto</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-btn active" data-target="home"><i class="fa-solid fa-user"></i> Beranda</a></li>
+                <li><a href="#" class="nav-btn" data-target="schedule"><i class="fa-solid fa-calendar-days"></i> Jadwal</a></li>
+                <li><a href="#" class="nav-btn" data-target="tasks"><i class="fa-solid fa-list-check"></i> Tugas</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="theme-toggle-btn" id="themeToggle" title="Ganti Mode Tampilan">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div class="hamburger" id="hamburgerBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KONTEN UTAMA WEBSITES -->
+    <main class="main-container">
+
+        <!-- ==========================================
+             SEKSI 1: BERANDA & BIODATA LENGKAP
+             ========================================== -->
+        <section id="home" class="page-section active-section">
+            <div class="profile-card">
+                <div class="profile-image-container">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop" alt="Foto Profil Siswa" class="profile-img">
+                    <span class="badge-status">Siswa Aktif</span>
+                </div>
+                <div class="profile-details">
+                    <h1>Alexander Putra Pratama</h1>
+                    <div class="profile-subtitle">SMA Negeri 1 Nusantara • Kelas XII MIPA 2</div>
+                    <p class="bio-text">
+                        Halo! Saya adalah seorang siswa kelas XII yang memiliki minat tinggi pada ilmu pengetahuan alam, teknologi informasi, dan desain grafis. Aktif dalam organisasi OSIS dan club Coding sekolah.
+                    </p>
+                    
+                    <!-- Biodata Lengkap -->
+                    <div class="biodata-grid">
+                        <div class="biodata-item">
+                            <span class="label">NISN</span>
+                            <span class="val">0051234567</span>
+                        </div>
+                        <div class="biodata-item">
+                            <span class="label">Tempat, Tgl Lahir</span>
+                            <span class="val">Jakarta, 14 Mei 2007</span>
+                        </div>
+                        <div class="biodata-item">
+                            <span class="label">Email</span>
+                            <span class="val">alexander.putra@gmail.com</span>
+                        </div>
+                        <div class="biodata-item">
+                            <span class="label">Cita-Cita</span>
+                            <span class="val">Software Engineer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu Informasi Tambahan -->
+            <div class="info-cards-grid">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-trophy"></i> Prestasi & Pengalaman</h3>
+                    <ul>
+                        <li>Juara 2 Olimpiade Informatika tingkat Kota (2025)</li>
+                        <li>Ketua Divisi Humas OSIS Periode 2024/2025</li>
+                        <li>Peserta Web Development Bootcamp untuk Pelajar</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-heart"></i> Minat & Hobi</h3>
+                    <ul>
+                        <li>Pemrograman Web (HTML, CSS, JavaScript)</li>
+                        <li>Desain Antarmuka Pengguna (UI/UX)</li>
+                        <li>Bermain Musik & Olahraga Basket</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SEKSI 2: JADWAL PELAJARAN MINGGUAN
+             ========================================== -->
+        <section id="schedule" class="page-section">
+            <div class="section-header">
+                <h2>Jadwal Pelajaran Mingguan</h2>
+                <p>Jadwal mata pelajaran MIPA Kelas XII - Semester Genap</p>
+            </div>
+
+            <div class="table-responsive">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Senin</th>
+                            <th>Selasa</th>
+                            <th>Rabu</th>
+                            <th>Kamis</th>
+                            <th>Jumat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>07.00 - 08.30</strong></td>
+                            <td><span class="tag-subject">Upacara / Matematika</span></td>
+                            <td><span class="tag-subject">Fisika</span></td>
+                            <td><span class="tag-subject">Kimia</span></td>
+                            <td><span class="tag-subject">Bahasa Indonesia</span></td>
+                            <td><span class="tag-subject">Olahraga</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>08.30 - 10.00</strong></td>
+                            <td><span class="tag-subject">Matematika Minat</span></td>
+                            <td><span class="tag-subject">Biologi</span></td>
+                            <td><span class="tag-subject">Bahasa Inggris</span></td>
+                            <td><span class="tag-subject">Sejarah</span></td>
+                            <td><span class="tag-subject">Agama</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: center; background-color: rgba(0,0,0,0.02); font-size: 0.85rem; color: var(--text-muted);">
+                                <em>-- Istirahat (10.00 - 10.30) --</em>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>10.30 - 12.00</strong></td>
+                            <td><span class="tag-subject">Fisika Lab</span></td>
+                            <td><span class="tag-subject">Kimia Lab</span></td>
+                            <td><span class="tag-subject">Informatika</span></td>
+                            <td><span class="tag-subject">Seni Budaya</span></td>
+                            <td><span class="tag-subject">Pramuka / Ekstra</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>13.00 - 14.30</strong></td>
+                            <td><span class="tag-subject">B. Inggris Lanjutan</span></td>
+                            <td><span class="tag-subject">PKN</span></td>
+                            <td><span class="tag-subject">BK / Pengayaan</span></td>
+                            <td><span class="tag-subject">Kewirausahaan</span></td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SEKSI 3: CATATAN TUGAS MATA PELAJARAN
+             ========================================== -->
+        <section id="tasks" class="page-section">
+            <div class="section-header">
+                <h2>Catatan Tugas Sekolah</h2>
+                <p>Kelola dan pantau tenggat waktu tugas harian kamu</p>
+            </div>
+
+            <!-- Kontrol pencarian & Tambah Tugas -->
+            <div class="task-controls">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="taskSearch" placeholder="Cari tugas atau mata pelajaran...">
+                </div>
+                <button class="btn-add-task" id="openModalBtn">
+                    <i class="fa-solid fa-plus"></i> Tambah Tugas
+                </button>
+            </div>
+
+            <!-- Grid Daftar Tugas -->
+            <div class="tasks-grid" id="tasksContainer">
+                <!-- Data tugas akan di-render secara dinamis via JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL POPUP FORM TAMBAH TUGAS -->
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tambah Tugas Baru</h3>
+                <button class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="taskSubject">Mata Pelajaran</label>
+                    <input type="text" id="taskSubject" required placeholder="Contoh: Matematika">
+                </div>
+                <div class="form-group">
+                    <label for="taskTitle">Judul Tugas</label>
+                    <input type="text" id="taskTitle" required placeholder="Contoh: Latihan Soal Bab 3">
+                </div>
+                <div class="form-group">
+                    <label for="taskDeadline">Tenggat Waktu (Deadline)</label>
+                    <input type="date" id="taskDeadline" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDesc">Deskripsi Singkat</label>
+                    <textarea id="taskDesc" rows="3" placeholder="Detail petunjuk tugas..."></textarea>
+                </div>
+                <button type="submit" class="form-submit-btn">Simpan Tugas</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Portofolio Siswa SMA. Dibuat untuk Keperluan Pembelajaran.</p>
+    </footer>
+
+    <!-- ==========================================
+         BAGIAN JAVASCRIPT (script.js)
+         ========================================== -->
+    <script>
+        // Data Awal Catatan Tugas (Simulasi Database Sederhana)
+        let initialTasks = [
+            {
+                id: 1,
+                subject: "Matematika",
+                title: "Latihan Soal Turunan",
+                deadline: "2026-11-05",
+                desc: "Kerjakan Buku Paket halaman 102 No. 1-10 di buku tugas.",
+                completed: false
+            },
+            {
+                id: 2,
+                subject: "Fisika",
+                title: "Laporan Praktikum Gelombang",
+                deadline: "2026-11-02",
+                desc: "Ketik rapi dan cetak sesuai dengan format PDF dari guru.",
+                completed: true
+            },
+            {
+                id: 3,
+                subject: "Bahasa Indonesia",
+                title: "Membuat Teks Artikel Opinian",
+                deadline: "2026-11-10",
+                desc: "Tema artikel bebas berkaitan dengan isu lingkungan terkini.",
+                completed: false
+            }
+        ];
+
+        // Referensi Elemen DOM
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const sections = document.querySelectorAll('.page-section');
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        const tasksContainer = document.getElementById('tasksContainer');
+        const taskSearch = document.getElementById('taskSearch');
+        const taskModal = document.getElementById('taskModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const taskForm = document.getElementById('taskForm');
+
+        // === 1. FITUR PIPELINE/NAVIGASI SINGLE-PAGE ===
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Ubah status tombol navigasi aktif
+                navBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Tampilkan seksi yang dipilih
+                const target = btn.getAttribute('data-target');
+                sections.forEach(sec => {
+                    sec.classList.remove('active-section');
+                    if (sec.id === target) {
+                        sec.classList.add('active-section');
+                    }
+                });
+
+                // Tutup mobile menu jika terbuka
+                navLinks.classList.remove('show');
+            });
+        });
+
+        // Hamburger Menu Toggle
+        hamburgerBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+
+        // === 2. FITUR DARK MODE ===
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const icon = themeToggleBtn.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        });
+
+        // === 3. MANAJEMEN CATATAN TUGAS ===
+
+        // Fungsi Render List Tugas
+        function renderTasks(taskList) {
+            tasksContainer.innerHTML = '';
+
+            if (taskList.length === 0) {
+                tasksContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Tidak ada tugas yang ditemukan.</p>`;
+                return;
+            }
+
+            taskList.forEach(task => {
+                const card = document.createElement('div');
+                card.className = `task-card ${task.completed ? 'completed' : 'pending'}`;
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="task-header">
+                            <span class="task-subject">${task.subject}</span>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: ${task.completed ? '#10b981' : '#f59e0b'}">
+                                ${task.completed ? 'Selesai' : 'Belum Selesai'}
+                            </span>
+                        </div>
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-desc">${task.desc}</div>
+                    </div>
+                    <div class="task-footer">
+                        <span><i class="fa-regular fa-clock"></i> ${task.deadline}</span>
+                        <div class="task-actions">
+                            <button class="action-btn check" onclick="toggleTaskStatus(${task.id})" title="Tandai Selesai">
+                                <i class="fa-solid ${task.completed ? 'fa-rotate-left' : 'fa-circle-check'}"></i>
+                            </button>
+                            <button class="action-btn delete" onclick="deleteTask(${task.id})" title="Hapus Tugas">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                tasksContainer.appendChild(card);
+            });
+        }
+
+        // Fungsi Tambah Tugas
+        taskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newSubject = document.getElementById('taskSubject').value;
+            const newTitle = document.getElementById('taskTitle').value;
+            const newDeadline = document.getElementById('taskDeadline').value;
+            const newDesc = document.getElementById('taskDesc').value;
+
+            const newTask = {
+                id: Date.now(),
+                subject: newSubject,
+                title: newTitle,
+                deadline: newDeadline,
+                desc: newDesc,
+                completed: false
+            };
+
+            initialTasks.unshift(newTask);
+            renderTasks(initialTasks);
+
+            // Reset Form & Tutup Modal
+            taskForm.reset();
+            taskModal.classList.remove('active');
+        });
+
+        // Fungsi Toggle Status Selesai
+        window.toggleTaskStatus = function(id) {
+            initialTasks = initialTasks.map(t => {
+                if (t.id === id) {
+                    return { ...t, completed: !t.completed };
+                }
+                return t;
+            });
+            renderTasks(initialTasks);
+        };
+
+        // Fungsi Hapus Tugas
+        window.deleteTask = function(id) {
+            initialTasks = initialTasks.filter(t => t.id !== id);
+            renderTasks(initialTasks);
+        };
+
+        // Pencarian Tugas
+        taskSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filteredTasks = initialTasks.filter(t => 
+                t.subject.toLowerCase().includes(query) || 
+                t.title.toLowerCase().includes(query)
+            );
+            renderTasks(filteredTasks);
+        });
+
+        // Modal Handlers
+        openModalBtn.addEventListener('click', () => taskModal.classList.add('active'));
+        closeModalBtn.addEventListener('click', () => taskModal.classList.remove('active'));
+
+        // Inisialisasi Tampilan Awal
+        renderTasks(initialTasks);
+    </script>
+</body>
+</html>
